@@ -15,6 +15,6 @@ To use it, please follows this instruction.
 @ B4	0	0	2	
 @ B5	0	0	9	
 
---input or -i: file input in the above format in TSV.
+--input or -i: file input in the above format in TSV (the @ indicates the row, nothing more, please look into the script, there's an example how it should look).
 --size or -s: the number of subsamples.
 --count or -c: the total counts must be less than the smallest sample.

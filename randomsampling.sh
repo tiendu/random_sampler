@@ -28,7 +28,7 @@ while getopts "i:s:c:h" option; do
 	esac
 done
 
-shift $(expr $OPTIND - 1)
+shift "$((OPTIND-1))"
 
 echo "input = ${filepath}"
 echo "sampling size = ${size}"

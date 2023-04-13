@@ -10,15 +10,15 @@ GetOptions(
 
 # Example:
 # 	S1	S2	S3
-# A1	2	4	0	
-# A2	3	12	0	
-# A3	5	0	0	
-# A5	0	0	12	
-# B1	10	5	4	
-# B2	3	8	0	
-# B3	0	3	8	
-# B4	0	0	2	
-# B5	0	0	9	
+# A1	2	4	0
+# A2	3	12	0
+# A3	5	0	0
+# A5	0	0	12
+# B1	10	5	4
+# B2	3	8	0
+# B3	0	3	8
+# B4	0	0	2
+# B5	0	0	9
 
 my $file_path_cp = $file_path;
 $file_path_cp =~ s/.*\///;
@@ -29,7 +29,7 @@ print "Parameters:\n\t- Number of subsamples: ${size}\n\t- Total count: ${count}
 print "=" x 30 . "\n";
 print "Running now! Please wait...\n";
 
-open my $file, "<", $file_path or die;
+open my $file, "<:utf8", $file_path or die;
 my @headers;
 my %records;
 while (<$file>) {
@@ -45,7 +45,7 @@ close $file;
 
 for my $key1 (keys %records) {
     for my $key2 (keys %{$records{$key1}}) {
-        open my $tmp, ">>", "${key1}_${file_name}.tmp";
+        open my $tmp, ">>:utf8", "${key1}_${file_name}.tmp";
         my $count = $records{$key1}{$key2};
         while ($count > 0) {
             print $tmp "$key2\n";
@@ -56,8 +56,8 @@ for my $key1 (keys %records) {
 my $iter = 0;
 while ($iter < $size) {
     for my $header (@headers[1 .. $#headers]) {
-        open my $input, "<", "${header}_${file_name}.tmp";
-        open my $output, ">", "separated_${header}${iter}_${file_name}.tmp";
+        open my $input, "<:utf8", "${header}_${file_name}.tmp";
+        open my $output, ">:utf8", "separated_${header}${iter}_${file_name}.tmp";
         my @records;
         while (<$input>) {
             chomp;
@@ -71,10 +71,10 @@ while ($iter < $size) {
     };
     $iter++;
 };
-    
+
 for my $file (glob("separated_*_${file_name}.tmp")) {
     my %counter;
-    open my $input, "<", $file;
+    open my $input, "<:utf8", $file;
     my $header;
     while (<$input>) {
         chomp;
@@ -83,7 +83,7 @@ for my $file (glob("separated_*_${file_name}.tmp")) {
         $counter{$_}++;
     };
     close $file;
-    open my $output, ">", "count_${file}";
+    open my $output, ">:utf8", "count_${file}";
     print $output "$header\n";
     for my $key (sort keys %counter) {
         print $output join("\t", $key, $counter{$key}, "\n");
@@ -104,7 +104,7 @@ for my $file (@count_files) {
     close $count_file;
 };
 
-open my $merged, ">", "subsampled_${file_name}_${size}_${count}.tsv";
+open my $merged, ">:utf8", "subsampled_${file_name}_${size}_${count}.tsv";
 for my $key (sort keys %records) {
     my @values = @{$records{$key}};
     print $merged join("\t", $key, map { $_ // 0 } @values[0 .. $tally - 1], "\n");

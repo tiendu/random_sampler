@@ -5,7 +5,7 @@
 ####################################
 
 # Remove return-carriage characters to be used with Windows.
-tr -d '\015' $0 > temp_$0 && mv temp_$0 $0
+tr -d '\015' < $0 > temp_$0 && mv temp_$0 $0
 
 usage() {
 cat << EOF

@@ -63,7 +63,7 @@ cmdline() {
 
 function input_check {
     local count=$(awk 'NR > 1 { for (i=2; i<=NF; i++) sum[i] += $i } END { for (i in sum) print sum[i] }' $INPUT_PATH)
-    local smallest=$(sort -nr <<< $count | head -n 1)
+    local smallest=$(sort -n <<< $count | head -n 1)
     if [ $COUNT -ge $smallest ]; then
         echo "Please enter \"count\" less than ${smallest}!"
         exit 0

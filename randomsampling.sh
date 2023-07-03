@@ -5,7 +5,7 @@
 ####################################
 
 # Remove return-carriage characters to be used with Windows.
-sed -i 's/\r//g' $0
+sed -i 's/$\r//g; s/\r$//g' $0
 
 usage() {
 cat << EOF

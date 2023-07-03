@@ -80,7 +80,7 @@ function sampling {
     local ncol=$1
     local num=$2
     local i
-    for i in `seq -w 2 $num`; do
+    for i in `seq -w 2 $ncol`; do
         awk '{ print $1 }' headerless > name_$i;
         cut -f1,$i headerless |
             awk '{ i=$2; while (i--) print $1 }' |

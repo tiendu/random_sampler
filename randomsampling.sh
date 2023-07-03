@@ -79,6 +79,7 @@ function prepare_temp {
 function sampling {
     local ncol=$1
     local num=$2
+    local i
     for i in `seq -w 2 $num`; do
         awk '{ print $1 }' headerless > name_$i;
         cut -f1,$i headerless |

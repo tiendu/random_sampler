@@ -33,7 +33,7 @@ cmdline() {
         esac
     done
 
-    # Indexing option for later.
+    # Index option for later.
     OPTIND=1
 
     # Reset the positional parameters to the short options.

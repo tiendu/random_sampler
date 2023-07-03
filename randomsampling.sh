@@ -136,6 +136,9 @@ main() {
 
     readarray -td"." a <<< $INPUT_PATH
     mv file.tmp subsampled_${a[0]}_${SIZE}_${COUNT}.${a[1]}
+ 
+    # Remove carriage-return character (happens if one opens the file in Windows and saves it).
+    sed -i 's/\r//g' subsampled_${a[0]}_${SIZE}_${COUNT}.${a[1]}
 
     # Finishing up.
     rm header*

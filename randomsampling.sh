@@ -75,7 +75,6 @@ function prepare_temp {
     awk 'NR == 1 { print $0 }' $INPUT_PATH > header
 }
 
-
 function sampling {
     local ncol=$1
     local num=$2
@@ -150,7 +149,7 @@ main() {
     rm tmp_*
     rm col_*
 
-    echo "Result: subsampled_${a[0]}_${SIZE}_${COUNT}.${a[1]}"
+    echo "Output: $PWD/subsampled_${a[0]}_${SIZE}_${COUNT}.${a[1]}"
 }
 
 # Call the main function to start the subsampling process
